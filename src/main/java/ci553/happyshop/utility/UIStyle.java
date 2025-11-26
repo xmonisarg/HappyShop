@@ -28,8 +28,7 @@ package ci553.happyshop.utility;
  */
 
 public final class UIStyle {
-
-    //private constructor prevents instantiation
+    // Private constructor prevents instantiation
     private UIStyle() {
         throw new UnsupportedOperationException("UIStyle is a utility class");
     }
