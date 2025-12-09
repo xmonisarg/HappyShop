@@ -76,15 +76,13 @@ public class CustomerModel {
     }
 
     void addToTrolley(){
-        if(theProduct!= null){
-
-            // trolley.add(theProduct) — Product is appended to the end of the trolley.
-            // To keep the trolley organized, add code here or call a method that:
-            //TODO
-            // 1. Merges items with the same product ID (combining their quantities).
-            // 2. Sorts the products in the trolley by product ID.
+        if(theProduct!= null) {
             trolley.add(theProduct);
-            displayTaTrolley = ProductListFormatter.buildString(trolley); //build a String for trolley so that we can show it
+            sortTrolley(); // Sort method for my merging quantities
+            displayTaReceipt = "";
+
+            trolley.add(theProduct);
+            displayTaTrolley = ProductListFormatter.buildString(trolley); // build a String for trolley so that we can show it
         }
         else{
             displayLaSearchResult = "Please search for an available product before adding it to the trolley";
@@ -94,8 +92,13 @@ public class CustomerModel {
         updateView();
     }
  void sortTrolley() {
+        // If statement to make sure that the trolley can be merge quantities and that the trolley is not empty
+        if (trolley.isEmpty()) {
+            displayTaTrolley = "Trolley is empty";
+        return;
+        }
         trolley.sort(Comparator.comparing(Product::getProductId)); // It begins by sorting the product by the product ID
-     displayTaTrolley = ProductListFormatter.buildString(trolley);
+
      ArrayList<Product> merged = new ArrayList<>(); // It merges any duplicates products together
 
      for (Product p : trolley){
@@ -111,6 +114,7 @@ public class CustomerModel {
      }
      trolley.clear();
      trolley.addAll(merged); // It the displays the correct merged quantity in the trolley
+     displayTaTrolley = ProductListFormatter.buildString(trolley); // Displays the new quantities
  }
 
     void checkOut() throws IOException, SQLException {
@@ -162,6 +166,10 @@ public class CustomerModel {
             System.out.println("Your trolley is empty");
         }
         updateView();
+    }
+
+    void payment() throws IOException, SQLException {
+
     }
 
     /**
