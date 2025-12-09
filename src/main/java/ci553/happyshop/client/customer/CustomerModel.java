@@ -25,10 +25,9 @@ public class CustomerModel {
     public DatabaseRW databaseRW; //Interface type, not specific implementation
                                   //Benefits: Flexibility: Easily change the database implementation.
     public class organizedTrolley implements Comparable<organizedTrolley> {
-        public int productID;
-        public String productName;
+        String productID;
 
-        organizedTrolley(int productID, String productName) {
+        organizedTrolley(String productID) {
             this.productID = productID;
             this.productName = productName;
         }
@@ -82,6 +81,7 @@ public class CustomerModel {
             //TODO
             // 1. Merges items with the same product ID (combining their quantities).
             // 2. Sorts the products in the trolley by product ID.
+            Comparable<Product>
             trolley.add(theProduct);
             displayTaTrolley = ProductListFormatter.buildString(trolley); //build a String for trolley so that we can show it
         }
