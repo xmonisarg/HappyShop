@@ -25,9 +25,10 @@ public class CustomerModel {
     public DatabaseRW databaseRW; //Interface type, not specific implementation
                                   //Benefits: Flexibility: Easily change the database implementation.
     public class organizedTrolley implements Comparable<organizedTrolley> {
-        String productID;
+        public int productID;
+        public String productName;
 
-        organizedTrolley(String productID) {
+        organizedTrolley(int productID, String productName) {
             this.productID = productID;
             this.productName = productName;
         }
@@ -81,7 +82,6 @@ public class CustomerModel {
             //TODO
             // 1. Merges items with the same product ID (combining their quantities).
             // 2. Sorts the products in the trolley by product ID.
-            Comparable<Product>
             trolley.add(theProduct);
             displayTaTrolley = ProductListFormatter.buildString(trolley); //build a String for trolley so that we can show it
         }
@@ -92,6 +92,7 @@ public class CustomerModel {
         displayTaReceipt=""; // Clear receipt to switch back to trolleyPage (receipt shows only when not empty)
         updateView();
     }
+
 
     void checkOut() throws IOException, SQLException {
         if(!trolley.isEmpty()){
