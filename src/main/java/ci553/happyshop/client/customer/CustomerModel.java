@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -92,7 +93,25 @@ public class CustomerModel {
         displayTaReceipt=""; // Clear receipt to switch back to trolleyPage (receipt shows only when not empty)
         updateView();
     }
+ void sortTrolley() {
+        trolley.sort(Comparator.comparing(Product::getProductId)); // It begins by sorting the product by the product ID
+     displayTaTrolley = ProductListFormatter.buildString(trolley);
+     ArrayList<Product> merged = new ArrayList<>(); // It merges any duplicates products together
 
+     for (Product p : trolley){
+         if(merged.isEmpty()) {
+             merged.add(p);
+         }
+         else { // It then uses compares the product ID and merges the quantities
+             Product last = merged.get(merged.size()-1);
+             if (last.getProductId() == p.getProductId()) {
+                 merged.add(p);
+             }
+         }
+     }
+     trolley.clear();
+     trolley.addAll(merged); // It the displays the correct merged quantity in the trolley
+ }
 
     void checkOut() throws IOException, SQLException {
         if(!trolley.isEmpty()){
