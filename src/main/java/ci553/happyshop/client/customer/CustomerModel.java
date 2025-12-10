@@ -77,7 +77,13 @@ public class CustomerModel {
 
     void addToTrolley(){
         if(theProduct!= null) {
-            trolley.add(theProduct);
+            Product newItem = new Product(
+                    theProduct.getProductId(),
+                    theProduct.getProductDescription(),
+                    theProduct.getUnitPrice(),
+                    1,
+                    theProduct.getStockQuantity()
+            );
             sortTrolley(); // Sort method for my merging quantities
             displayTaReceipt = "";
             displayTaTrolley = ProductListFormatter.buildString(trolley); // build a String for trolley so that we can show it
@@ -107,6 +113,8 @@ public class CustomerModel {
              Product last = merged.get(merged.size()-1);
              if (last.getProductId() == p.getProductId()) {
                  last.setOrderedQuantity(last.getOrderedQuantity() + p.getOrderedQuantity());
+             } else {
+                 merged.add(p);
              }
          }
      }
