@@ -149,6 +149,13 @@ public class CustomerView  {
         vbTrolleyPage.setStyle("-fx-padding: 15px;");
         return vbTrolleyPage;
     }
+    private VBox CreatePaymentPage() {
+        Label laPageTitle = new Label("Payment");
+        laPageTitle.setStyle(UIStyle.labelTitleStyle);
+
+
+        return vbReceiptPage;
+    }
 
     private VBox createReceiptPage() {
         Label laPageTitle = new Label("Receipt");
