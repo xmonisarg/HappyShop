@@ -13,6 +13,11 @@ import ci553.happyshop.orderManagement.OrderHub;
 import ci553.happyshop.storageAccess.DatabaseRW;
 import ci553.happyshop.storageAccess.DatabaseRWFactory;
 import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -41,16 +46,10 @@ public class Main extends Application {
 
     // Creating a login window to start the system
     @Override
-    public void start(Stage window) throws IOException {
-        LoginView login = newLoginView();
-
-        login.onLoginSuccess = () -> startSystem();
-
-        login.onWarehouseManagerLoginSucess = () -> startWarehouseClient();
-
-        login.onGuestLoginSuccess() ->startSystem();
-
-        public void startSystem () {  //starts the system
+    public void start(Stage window)  {
+        showLoginPage(window); // Creating a new login page on system startup
+    }
+        private void startSystem() {  //starts the system
             startCustomerClient();
             startPickerClient();
             startOrderTracker();
@@ -68,6 +67,40 @@ public class Main extends Application {
 
             startEmergencyExit();
         }
+    // It creates a viewing page to display login page where you can pick Customer or Guest
+
+    private void showLoginPage(Stage window) {
+
+
+        Label laWelcome = new Label("Welcome to Happy Shop");
+        Button btnCustomer = new Button("Customer Login");
+        Button btnGuest = new Button("Guest Login");
+        Button btnWarehouse = new Button("Warehouse Login");
+
+
+        // these create my button actions
+        btnCustomer.setOnAction(e -> {
+            window.close();
+            startCustomerClient();
+        });
+
+        btnGuest.setOnAction(e -> {
+            window.close();
+            startCustomerClient();
+        });
+
+        btnWarehouse.setOnAction(e ->{
+            window.close();
+            startWarehouseClient();
+        });
+        // This creates the layout I want
+        VBox layout = new VBox(25, laWelcome, btnCustomer, btnGuest);
+        layout.setAlignment(Pos.CENTER);
+
+        Scene scene = new Scene(layout, 300, 200);
+        window.setScene(scene);
+        window.setTitle("Happy Shop");
+        window.show();
     }
 
     /** The customer GUI -search product, add to trolley, cancel/submit trolley, view receipt

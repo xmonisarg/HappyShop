@@ -44,6 +44,12 @@ public record UIStyle() {
     public static final int EmergencyExitWinWidth = 200;
     public static final int EmergencyExitWinHeight = 300;
 
+    public static final String loginTitleStyle =
+            "-fx-font-weight: bold; " +
+                    "-fx-font-size: 20px; " +
+                    "-fx-text-fill: purple;";
+
+
     public static final String labelTitleStyle ="-fx-font-weight: bold; " +
             "-fx-font-size: 16px; -fx-text-fill: purple;";
 

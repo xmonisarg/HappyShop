@@ -26,7 +26,7 @@ import java.sql.SQLException;
  *    depending on the current context. Only one of these is shown at a time.
  */
 
-public class CustomerView  {
+public class CustomerView {
     public CustomerController cusController;
 
     private final int WIDTH = UIStyle.customerWinWidth;
@@ -38,6 +38,8 @@ public class CustomerView  {
     private VBox vbTrolleyPage;  //vbTrolleyPage and vbReceiptPage will swap with each other when need
     private VBox vbReceiptPage;
     private VBox vbPaymentPage;
+    private VBox vbSearchPage;
+
 
     TextField tfId; //for user input on the search page. Made accessible so it can be accessed or modified by CustomerModel
     TextField tfName; //for user input on the search page. Made accessible so it can be accessed by CustomerModel
@@ -54,9 +56,10 @@ public class CustomerView  {
     private Stage viewWindow;
 
     public void start(Stage window) {
-        VBox vbSearchPage = createSearchPage();
+        vbSearchPage = createSearchPage();
         vbTrolleyPage = CreateTrolleyPage();
         vbReceiptPage = createReceiptPage();
+        vbPaymentPage = createPaymentPage();
 
         // Create a divider line
         Line line = new Line(0, 0, 0, HEIGHT);
@@ -73,17 +76,24 @@ public class CustomerView  {
         Scene scene = new Scene(hbRoot, WIDTH, HEIGHT);
         window.setScene(scene);
         window.setTitle("🛒 HappyShop Customer Client");
-        WinPosManager.registerWindow(window,WIDTH,HEIGHT); //calculate position x and y for this window
+        WinPosManager.registerWindow(window, WIDTH, HEIGHT); //calculate position x and y for this window
         window.show();
-        viewWindow=window;// Sets viewWindow to this window for future reference and management.
+        viewWindow = window;// Sets viewWindow to this window for future reference and management.
     }
 
-    private VBox createLoginPage() {
+   private void createLoginPage() { // Creating a login page for customer, guest and warehouse
         Label laPageTitle = new Label("Welcome to HappyShop!");
 
+        Button btnCustomer = new Button("Customer Login");
+        Button btnGuest = new Button("Guest Login");
+        Button btnWarehouse = new Button("Warehouse Login");
 
-        VBox vbLoginPage = createLoginPage();
-    }
+        VBox loginRoot = new VBox(20, laPageTitle, btnCustomer, btnGuest);
+       loginRoot.setAlignment(Pos.CENTER);
+   }
+
+
+
 
     private VBox createSearchPage() {
         Label laPageTitle = new Label("Search by Product ID/Name");
@@ -188,7 +198,7 @@ public class CustomerView  {
         taPayment.setEditable(false);
         taPayment.setPrefSize(WIDTH/2, HEIGHT-50);
 
-        Button btnPay
+        //Button btnPay
 
 
 
