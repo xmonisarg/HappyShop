@@ -226,7 +226,7 @@ public class CustomerModel {
      //File.toURI(): Converts a File object (a file on the filesystem) to a URI object
 
     //for test only
-    public ArrayList<Product> getTrolley() {
+    public ArrayList<Product>  getTrolley() {
         return trolley;
     }
 }
