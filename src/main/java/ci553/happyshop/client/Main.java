@@ -12,6 +12,7 @@ import ci553.happyshop.client.warehouse.*;
 import ci553.happyshop.orderManagement.OrderHub;
 import ci553.happyshop.storageAccess.DatabaseRW;
 import ci553.happyshop.storageAccess.DatabaseRWFactory;
+import ci553.happyshop.utility.UIStyle;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -47,7 +48,7 @@ public class Main extends Application {
     // Creating a login window to start the system
     @Override
     public void start(Stage window)  {
-        showLoginPage(window); // Creating a new login page on system startup
+        startLoginPage(window); // Creating a new login page on system startup
     }
         private void startSystem() {  //starts the system
             startCustomerClient();
@@ -69,16 +70,23 @@ public class Main extends Application {
         }
     // It creates a viewing page to display login page where you can pick Customer or Guest
 
-    private void showLoginPage(Stage window) {
+    private void startLoginPage(Stage window) {
 
-
-        Label laWelcome = new Label("Welcome to Happy Shop");
+        // Title and buttons using the UIStyle which was imported
+        Label laWelcome = new Label("🛒🛒 Welcome to Happy Shop 🛒🛒");
+        laWelcome.setStyle(UIStyle.labelTitleStyle);
         Button btnCustomer = new Button("Customer Login");
+        btnCustomer.setStyle(UIStyle.buttonStyle);
+        btnCustomer.setPrefSize(220, 45);
         Button btnGuest = new Button("Guest Login");
+        btnGuest.setStyle(UIStyle.buttonStyle);
+        btnGuest.setPrefSize(220, 45);
         Button btnWarehouse = new Button("Warehouse Login");
+        btnWarehouse.setStyle(UIStyle.buttonStyle);
+        btnWarehouse.setPrefSize(220, 45);
 
 
-        // these create my button actions
+        // These create my button actions - go to customer login, guest or warehouse
         btnCustomer.setOnAction(e -> {
             window.close();
             startCustomerClient();
@@ -92,12 +100,19 @@ public class Main extends Application {
         btnWarehouse.setOnAction(e ->{
             window.close();
             startWarehouseClient();
+            startPickerClient();
+            initializeOrderMap();
         });
         // This creates the layout I want
-        VBox layout = new VBox(25, laWelcome, btnCustomer, btnGuest);
+        VBox layout = new VBox(25, laWelcome, btnCustomer, btnGuest, btnWarehouse);
         layout.setAlignment(Pos.CENTER);
+        layout.setStyle(UIStyle.rootStyle);
 
-        Scene scene = new Scene(layout, 300, 200);
+        Scene scene = new Scene(
+                layout,
+                UIStyle.loginPageHeight,
+                UIStyle.loginPageWidth
+        );
         window.setScene(scene);
         window.setTitle("Happy Shop");
         window.show();

@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 
+
 /**
  * The CustomerView is separated into two sections by a line :
  *
@@ -81,15 +82,27 @@ public class CustomerView {
         viewWindow = window;// Sets viewWindow to this window for future reference and management.
     }
 
-   private void createLoginPage() { // Creating a login page for customer, guest and warehouse
-        Label laPageTitle = new Label("Welcome to HappyShop!");
+   private VBox createLoginPage() { // Creating a login page for customer, guest and warehouse
+       Label laPageTitle = new Label("🛒🛒 Welcome to HappyShop! 🛒🛒");
+       laPageTitle.setStyle(UIStyle.labelTitleStyle);
+       // Buttons for the login
+       Button btnCustomer = new Button("Customer Login");
+       btnCustomer.setStyle(UIStyle.buttonStyle);
+       btnCustomer.setPrefSize(220, 45);
+       Button btnGuest = new Button("Guest Login");
+       btnGuest.setStyle(UIStyle.buttonStyle);
+       btnGuest.setPrefSize(220, 45);
+       Button btnWarehouse = new Button("Warehouse Login");
+       btnWarehouse.setStyle(UIStyle.buttonStyle);
+       btnWarehouse.setPrefSize(220, 45);
 
-        Button btnCustomer = new Button("Customer Login");
-        Button btnGuest = new Button("Guest Login");
-        Button btnWarehouse = new Button("Warehouse Login");
+       // Layout
 
-        VBox loginRoot = new VBox(20, laPageTitle, btnCustomer, btnGuest);
+       VBox loginRoot = new VBox(20, laPageTitle, btnCustomer, btnGuest, btnWarehouse);
        loginRoot.setAlignment(Pos.CENTER);
+       loginRoot.setStyle(UIStyle.rootStyle);
+
+       return loginRoot;
    }
 
 

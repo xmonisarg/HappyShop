@@ -84,6 +84,7 @@ public class CustomerModel {
                     1,
                     theProduct.getStockQuantity()
             );
+            trolley.add(newItem);
             sortTrolley(); // Sort method for my merging quantities
             displayTaReceipt = "";
             displayTaTrolley = ProductListFormatter.buildString(trolley); // build a String for trolley so that we can show it
