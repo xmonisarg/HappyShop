@@ -60,7 +60,6 @@ public class CustomerView {
         vbSearchPage = createSearchPage();
         vbTrolleyPage = CreateTrolleyPage();
         vbReceiptPage = createReceiptPage();
-        vbPaymentPage = createPaymentPage();
 
         // Create a divider line
         Line line = new Line(0, 0, 0, HEIGHT);
@@ -203,31 +202,46 @@ public class CustomerView {
         return vbReceiptPage;
     }
 
-    private VBox createPaymentPage() {
+    private VBox createPaymentPage(String receiptText) {
         Label laPageTitle = new Label("Payment");
         laPageTitle.setStyle(UIStyle.labelTitleStyle);
 
         taPayment = new TextArea();
         taPayment.setEditable(false);
-        taPayment.setPrefSize(WIDTH/2, HEIGHT-50);
+        taPayment.setPrefSize(WIDTH / 2, HEIGHT - 50);
 
-        //Button btnPay
+        // Displays the info from the receipt we just had
+        taPayment.setText(receiptText);
 
+        Button btnPayment = new Button("Pay"); // Buttons to make the payment
+        btnPayment.setOnAction(this::buttonClicked);
+        btnPayment.setStyle(UIStyle.buttonStyle);
 
+        vbPaymentPage = new VBox(15, laPageTitle, taPayment, btnPayment);
+        vbPaymentPage.setPrefWidth(COLUMN_WIDTH);
+        vbPaymentPage.setAlignment(Pos.TOP_CENTER);
+        vbPaymentPage.setStyle(UIStyle.rootStyleYellow);
 
         return vbPaymentPage;
     }
 
 
+
     private void buttonClicked(ActionEvent event) {
-        try{
-            Button btn = (Button)event.getSource();
+        try {
+            Button btn = (Button) event.getSource();
             String action = btn.getText();
-            if(action.equals("Add to Trolley")){
+            if (action.equals("Add to Trolley")) {
                 showTrolleyOrReceiptPage(vbTrolleyPage); //ensure trolleyPage shows if the last customer did not close their receiptPage
             }
-            if(action.equals("OK & Payment")){
+            if (action.equals("OK & Payment")) {
+                vbPaymentPage = createPaymentPage(taReceipt.getText()); // uses the receipt to go the payment
                 showTrolleyOrReceiptPage(vbPaymentPage);
+            }
+            if (action.equals("Pay")) {
+                cusController.doAction(action);
+                showTrolleyOrReceiptPage(vbTrolleyPage); // after payment, it goes back to the trolley page
+                return;
             }
             cusController.doAction(action);
         }
