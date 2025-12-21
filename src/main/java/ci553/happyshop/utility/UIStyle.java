@@ -56,6 +56,7 @@ public record UIStyle() {
             "-fx-font-size: 16px; -fx-text-fill: black;";
 
     public static final String labelStyle = "-fx-font-weight: bold; " +
+            "-fx-text-font: serif;" +
             "-fx-font-size: 14px; " +
             "-fx-text-fill: black; " +
             "-fx-background-color: lightblue;";
@@ -63,7 +64,9 @@ public record UIStyle() {
     public static final String comboBoxStyle ="-fx-font-weight: bold; " +
             "-fx-font-size: 14px;";
 
-    public static final String buttonStyle= "-fx-font-size: 15";
+    public static final String buttonStyle= "-fx-font-size: 15;" +
+    "-fx-background-color: lightpink;" +
+            "-fx-border-color: black";
 
     public static final String rootStyle = "-fx-padding: 8px; " +
             "-fx-background-color: #ffb56b";

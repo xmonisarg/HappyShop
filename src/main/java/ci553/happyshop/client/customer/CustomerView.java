@@ -134,7 +134,7 @@ public class CustomerView {
         btnAddToTrolley.setOnAction(this::buttonClicked);
         HBox hbBtns = new HBox(10, laPlaceHolder,btnSearch, btnAddToTrolley);
 
-        ivProduct = new ImageView("imageHolder.jpg");
+        ivProduct = new ImageView("trolley.png");
         ivProduct.setFitHeight(60);
         ivProduct.setFitWidth(60);
         ivProduct.setPreserveRatio(true); // Image keeps its original shape and fits inside 60×60
